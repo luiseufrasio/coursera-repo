@@ -1,0 +1,6 @@
+{
+  "directory": "bower_components",
+  "proxy": "http://49770413:%3fLetN%3f122015@172.30.121.57:9090",
+  "https-proxy": "http://49770413:%3fLetN%3f122015@172.30.121.57:9090",
+  "strict-ssl": false
+}
