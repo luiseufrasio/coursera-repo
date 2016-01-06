@@ -1,0 +1,27 @@
+<html>
+	<head>
+        <title>Guessing a Color - Part 1</title>
+    </head>
+    <body onload="do_game()">
+        <script>
+            var colors = ['blue', 'cyan', 'gold', 'gray', 'green', 'magenta', 'orange',
+                'red', 'white', 'yellow'];
+            var target;
+            var guess_input;
+
+            function do_game() {
+                var pos = Math.floor(Math.random() * 10);
+                target = colors[pos];
+                alert(target);
+                
+                while(true) {
+                    guess_input = prompt('I am thinking of one of these colors:\n\n' +
+                                        colors + '\n\n What color am I thinking of?');
+                    if (guess_input == target) {
+                        break;
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
