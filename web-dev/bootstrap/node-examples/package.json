@@ -1,0 +1,14 @@
+{
+  "name": "node-examples",
+  "version": "1.0.0",
+  "description": "examples from bootstrap course",
+  "main": "solve.js",
+  "scripts": {
+    "test": "node solve"
+  },
+  "author": "Luis Eufrasio",
+  "license": "ISC",
+  "dependencies": {
+    "prompt": "^0.2.14"
+  }
+}
