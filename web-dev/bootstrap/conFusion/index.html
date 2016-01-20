@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ristorante Con Fusion</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/mystyles.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap-social.css" rel="stylesheet">
 </head>
 
@@ -57,7 +57,7 @@
                          aria-hidden="true"></span> Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-toggle="modal" data-target="#loginModal">
+                    <li><a onclick="showLogin()">
                     <span class="glyphicon glyphicon-log-in"></span> Login</a>
                     </li>
                 </ul>
@@ -93,29 +93,6 @@
             </div>
         </div>
     </div>
-    <header class="jumbotron">
-
-        <!-- Main component for a primary marketing message or call to action -->
-
-        <div class="container">
-            <div class="row row-header">
-                <div class="col-xs-12 col-sm-8">
-                    <h1>Ristorante con Fusion</h1>
-                    <p style="padding:40px;"></p>
-                    <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
-                </div>
-                <div class="col-xs-12 col-sm-2">
-                    <p style="padding:20px;"></p>
-                    <img src="img/logo.png" class="img-responsive">
-                </div>
-                <div class="col-xs-12 col-sm-2">
-                    <p style="padding:20px;"></p>
-                    <a type="button" class="btn btn-warning btn-block" href="#reserveform"
-                     data-toggle="modal" data-target="#reserveModal">Reserve Table</a>
-                </div>
-            </div>
-        </div>
-    </header>
     <div id="reserveModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -180,6 +157,31 @@
             </div>
         </div>
     </div>
+    
+    <header class="jumbotron">
+
+        <!-- Main component for a primary marketing message or call to action -->
+
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-xs-12 col-sm-8">
+                    <h1>Ristorante con Fusion</h1>
+                    <p style="padding:40px;"></p>
+                    <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
+                </div>
+                <div class="col-xs-12 col-sm-2">
+                    <p style="padding:20px;"></p>
+                    <img src="img/logo.png" class="img-responsive">
+                </div>
+                <div class="col-xs-12 col-sm-2">
+                    <p style="padding:20px;"></p>
+                    <a type="button" class="btn btn-warning btn-block" href="#reserveform"
+                     onclick="showReserveTable()">Reserve Table</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
     <div class="container">
         <div class="row row-content">
             <div class="col-xs-12">
@@ -387,8 +389,9 @@
         </div>
     </footer>
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function(){
             $('#mycarousel').carousel( { interval: 2000 } );
@@ -399,6 +402,14 @@
                 $('#mycarousel').carousel('cycle');
             });
         });
+        
+        function showLogin() {
+            $("#loginModal").modal();
+        }
+        
+        function showReserveTable() {
+            $("#reserveModal").modal();
+        }
     </script>
 </body>
 
