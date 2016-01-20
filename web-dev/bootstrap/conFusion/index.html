@@ -57,7 +57,7 @@
                          aria-hidden="true"></span> Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a onclick="showLogin()">
+                    <li><a class="btn" id="myLogin">
                     <span class="glyphicon glyphicon-log-in"></span> Login</a>
                     </li>
                 </ul>
@@ -175,8 +175,8 @@
                 </div>
                 <div class="col-xs-12 col-sm-2">
                     <p style="padding:20px;"></p>
-                    <a type="button" class="btn btn-warning btn-block" href="#reserveform"
-                     onclick="showReserveTable()">Reserve Table</a>
+                    <a type="button" class="btn btn-warning btn-block" id="myReservation">
+                        Reserve Table</a>
                 </div>
             </div>
         </div>
@@ -401,15 +401,15 @@
             $('#carousel-play').click(function(){
                 $('#mycarousel').carousel('cycle');
             });
+            
+            $("#myReservation").click(function(){
+                $("#reserveModal").modal();
+            });
+            
+            $("#myLogin").click(function(){
+                $("#loginModal").modal();
+            });
         });
-        
-        function showLogin() {
-            $("#loginModal").modal();
-        }
-        
-        function showReserveTable() {
-            $("#reserveModal").modal();
-        }
     </script>
 </body>
 
