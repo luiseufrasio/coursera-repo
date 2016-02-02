@@ -9,13 +9,19 @@ angular.module('confusionApp')
             $scope.filtText = '';
             $scope.showDetails = false;
 
+            $scope.showMenu = false;
+            $scope.message = "Loading ...";
             $scope.dishes = [];
             
             menuFactory.getDishes()
                 .then(
                      function(response) {
                         $scope.dishes = response.data;
-                     }                 
+                        $scope.showMenu = true;
+                     },
+                     function(error) {
+                        $scope.message = "Error: " + error.status + " " + error.statusText;
+                     }               
                 );
                         
             $scope.select = function(setTab) {
@@ -79,12 +85,18 @@ angular.module('confusionApp')
             
             $scope.dish = {};
             
+            $scope.showDish = false;
+            $scope.message="Loading ...";
+            
             menuFactory.getDish(parseInt($stateParams.id,10))
             .then(
                     function(response) {
                             $scope.dish = response.data;
                             $scope.showDish = true;
-                    }
+                    },
+                    function(error) {
+                        $scope.message = "Error: "+error.status + " " + error.statusText;
+                    } 
             );
             
         }])
@@ -92,12 +104,17 @@ angular.module('confusionApp')
         .controller('IndexController', ['$scope', 'menuFactory', function($scope, menuFactory) {
             
             $scope.dish = {};
+            $scope.showDish = false;
+            $scope.message="Loading ...";
             
             menuFactory.getDish(0)
             .then(
                     function(response) {
                             $scope.dish = response.data;
                             $scope.showDish = true;
+                    },
+                    function(error) {
+                        $scope.message = "Error: " + error.status + " " + error.statusText;
                     }
             );
             
