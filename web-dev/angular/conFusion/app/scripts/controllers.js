@@ -49,7 +49,9 @@ angular.module('confusionApp')
                         
         }])
 
-        .controller('FeedbackController', ['$scope', function($scope) {
+        .controller('FeedbackController', ['$scope', 'feedBackFactory', function($scope, FeedBackFactory) {
+            
+            $scope.feedback = new FeedBackFactory();
             
             $scope.sendFeedback = function() {
                 
@@ -60,11 +62,10 @@ angular.module('confusionApp')
                     console.log('incorrect');
                 }
                 else {
-                    $scope.invalidChannelSelection = false;
-                    $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
-                    $scope.feedback.mychannel="";
-                    $scope.feedbackForm.$setPristine();
-                    console.log($scope.feedback);
+                    $scope.feedback.$save(function() {
+                        $scope.invalidChannelSelection = false;
+                        $scope.feedbackForm.$setPristine();
+                    });
                 }
             };
         }])
@@ -83,15 +84,6 @@ angular.module('confusionApp')
                 
         }])
         
-        .controller('IndexController', ['$scope', 'menuFactory', function($scope, menuFactory) {
-            
-            $scope.showDish = true;
-            $scope.message="Loading ...";
-            
-            $scope.dish = menuFactory.getDishes().get({id:0});
-            
-        }])
-
         .controller('DishCommentController', ['$scope', function($scope) {
             
             $scope.mycomment = {rating:5, comment:"", author:"", date:""};
@@ -111,15 +103,56 @@ angular.module('confusionApp')
 
         // implement the IndexController and About Controller here
        .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
-           $scope.dishes = menuFactory.getDishes();
+            $scope.showDish = false;
+            $scope.showPromotion = false;
+            $scope.showLeader = false;
+            $scope.message="Loading ...";
+
+            $scope.dish = menuFactory.getDishes().get({id:0})
+            .$promise.then(
+                function(response) {
+                    $scope.dish = response;
+                    $scope.showDish = true;
+                },
+                function(error) {
+                    $scope.message="Error: "+ error.status + " " + error.statusText;
+                }
+            );
+
+            $scope.promotion = menuFactory.getPromotion().get({id:0})
+            .$promise.then(
+                function(response) {
+                    $scope.promotion = response;
+                    $scope.showPromotion = true;
+                },
+                function(error) {
+                    $scope.message="Error: "+ error.status + " " + error.statusText;
+                }
+            );
            
-           $scope.promotion = menuFactory.getPromotion(0);
-           
-           $scope.leaders = corporateFactory.getLeaders();
+            $scope.leaders = corporateFactory.getLeaders().query(
+                function(response) {
+                    $scope.leaders = response;
+                    $scope.showLeader = true;
+                },
+                function(error) {
+                    $scope.message="Error: "+ error.status + " " + error.statusText;
+                }
+            );
         }])
         
        .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
-            $scope.leaders = corporateFactory.getLeaders();
+            $scope.showLeader = false;
+           
+            $scope.leaders = corporateFactory.getLeaders().query(
+                function(response) {
+                    $scope.leaders = response;
+                    $scope.showLeader = true;
+                },
+                function(error) {
+                    $scope.message="Error: "+ error.status + " " + error.statusText;
+                }
+            );
         }])
 
 ;
